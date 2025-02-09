@@ -1,0 +1,192 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background-image: url(../../Downloads/free-website-background-23.jpg);
+  display: flex;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.button {
+  background-color: #3d3d3d;
+  width: 300px;
+  border: none;
+  color: white;
+  padding: 2% 4%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 2% 1%;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #202020;
+}
+
+.hidden-text {
+  display: none;
+  position: absolute;
+  top: 150;
+  left: 50%;
+  z-index: 2;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  font-family: "Press Start 2P", serif;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.box {
+  z-index: 1;
+  width: 90%;
+  max-width: 500px;
+  height: 50%;
+  background-color: #3b3b3b;
+  position: fixed;
+  bottom: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  border-radius: 12px;
+  transition: bottom 1s ease-in-out, opacity 1s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.box.active {
+  bottom: 10%;
+  opacity: 1;
+}
+
+.container {
+  position: absolute;
+  top: 2%;
+  left: 2%;
+  perspective: 1000px;
+  width: calc(100% - 4%);
+  padding: 2%;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+h1, p {
+  transition: transform 0.1s;
+}
+
+h1 {
+  font-size: 2rem;
+  font-family: "Press Start 2P", serif;
+  font-weight: 400;
+  font-style: normal;
+  color: white;
+}
+
+p {
+  font-size: 1rem;
+  margin-top: 1rem;
+  color: white;
+}
+
+.typing-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 250%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  padding: 2%;
+}
+
+.typing {
+  width: 20ch;
+  animation: typing 5s steps(22) forwards, blink-caret 0.5s step-end infinite;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 0.15em solid orange;
+  font-family: monospace;
+  font-size: 1rem;
+  color: white;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 22ch; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: orange; }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  p {
+    font-size: 0.875rem;
+  }
+
+  .button {
+    padding: 2% 4%;
+    font-size: 0.875rem;
+  }
+
+  .box {
+    height: 30%;
+  }
+
+  .hidden-text {
+    font-size: 1.2rem;
+    top: 15%;
+  }
+
+  .typing {
+    width: 18ch;
+    animation: typing 5s steps(18) forwards, blink-caret 0.5s step-end infinite;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.2rem;
+  }
+  
+  p {
+    font-size: 0.75rem;
+  }
+
+  .button {
+    padding: 2% 4%;
+    font-size: 0.75rem;
+  }
+
+  .box {
+    height: 25%;
+  }
+
+  .hidden-text {
+    font-size: 1rem;
+    top: 10%;
+  }
+
+  .typing {
+    width: 16ch;
+    animation: typing 5s steps(16) forwards, blink-caret 0.5s step-end infinite;
+  }
+}

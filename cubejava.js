@@ -1,29 +1,48 @@
-const title = document.querySelector('h1');
-const paragraph = document.getElementById('movingParagraph');
+document.addEventListener('DOMContentLoaded', (event) => {
+    console.log('DOM fully loaded and parsed');
+    
+    // Setup the Intersection Observer
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                type();
+                observer.unobserve(entry.target); // Stop observing once typing starts
+            }
+        });
+    });
 
-document.addEventListener('mousemove', (e) => {
-    const x = (e.clientX / window.innerWidth) - 0.5;
-    const y = (e.clientY / window.innerHeight) - 0.5;
-
-    const rotateXTitle = y * 20;
-    const rotateYTitle = x * 20;
-
-    const rotateXParagraph = -y * 20;
-    const rotateYParagraph = -x * 20;
-
-    title.style.transform = `rotateX(${rotateXTitle}deg) rotateY(${rotateYTitle}deg)`;
-    paragraph.style.transform = `rotateX(${rotateXParagraph}deg) rotateY(${rotateYParagraph}deg)`;
+    observer.observe(document.getElementById('about'));
 });
 
-function slideUpBox() {
-    const box = document.getElementById('slideBox');
-    box.classList.add('active');
+const typingText = document.getElementById('typing-text');
+const text = "I'm Maytri Shah,<br>a web developer with a flair for creating dynamic and <br> interactive web pages.<br> My portfolio showcases a collection of projects that <br>demonstrate my proficiency in HTML, CSS, JavaScript,<br> and UX design principles. <br><br>Dive in to explore my work and get to know me better!";
+let index = 0;
+
+function type() {
+    console.log('Typing function called');
+    if (index < text.length) {
+        if (text.charAt(index) === '<') {
+            typingText.innerHTML += "<br>";
+            index += 4; // Skip the '<br>' tag
+        } else {
+            typingText.innerHTML += text.charAt(index);
+            index++;
+        }
+        setTimeout(type, 100); // Adjust the speed by changing the timeout duration
+    } else {
+        console.log('Finished typing text');
+    }
 }
 
-function showText() {
-    const text = document.getElementById('myText');
-    text.style.display = 'block';
-    setTimeout(() => {
-        text.style.opacity = 1;
-    }, 10); // Small delay to allow display change to take effect
+function scrollToNextSection() {
+    const currentSection = document.querySelector('.page:not(.hidden)');
+    let nextSection = currentSection.nextElementSibling;
+    while (nextSection && !nextSection.classList.contains('page')) {
+        nextSection = nextSection.nextElementSibling;
+    }
+    if (nextSection) {
+        currentSection.classList.add('hidden');
+        nextSection.classList.remove('hidden');
+        nextSection.scrollIntoView({ behavior: 'smooth' });
+    }
 }
